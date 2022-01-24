@@ -4,14 +4,15 @@ from datetime import datetime
 from datetime import timedelta
 import time
 import os
-
+import urllib
 
 # Rapt API calls
 def getToken(username, password):
 
     url = "https://id.rapt.io/connect/token"
 
-    payload = f'client_id=rapt-user&grant_type=password&username={username}&password={password}'
+    payload = f'client_id=rapt-user&grant_type=password&username={urllib.parse.quote_plus(username)}&password={password}'
+    print(payload)
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded'
     }
