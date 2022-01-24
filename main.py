@@ -2,6 +2,7 @@ import requests
 import json
 from datetime import datetime
 from datetime import timedelta
+import time
 import os
 
 
@@ -16,8 +17,11 @@ def getToken(username, password):
     }
 
     response = requests.request("POST", url, headers=headers, data=payload)
+    result = json.loads(response.text)
 
-    return(json.loads(response.text))
+    result['expiry_time'] = result.get('expires_in') + time.time()
+
+    return(result)
 
 def getTelemetry(hydrometerId, token):
 
@@ -77,10 +81,13 @@ hydroKey = os.environ.get('HYDRO_KEY')
 RAPT_USER = os.environ.get('RAPT_USER')
 RAPT_PW = os.environ.get('RAPT_PW')
 BF_PASS = os.environ.get('BF_PASS')
-
+token = json.loads(os.environ.get('TOKEN', {}))
 
 if __name__ == '__main__':
-    token = getToken(RAPT_USER, RAPT_PW)
+    if time.time() < token.get('expiry_time'):
+        token = getToken(RAPT_USER, RAPT_PW)
+        os.environ["TOKEN"] = json.dumps(token)
+
     hydrometerDetails = getHydrometerDetails(hydroKey, token['access_token'])
     data = getTelemetry(hydroKey, token['access_token'])
     postBFUpdates(f'http://log.brewfather.net/stream?id={BF_PASS}',hydrometerDetails, data[-1])
