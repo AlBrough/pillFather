@@ -5,8 +5,8 @@
 set variables as follows:
 
 HYDRO_KEY - the ID of the pill from the Rapt API
-RAPT_USER - Usually your email- url encoded for now. 
-RAPT_Password - the API secret generated on the RAPT APP
+RAPT_USER - Usually your email 
+RAPT_Password - the API secret generated on the RAPT APP*
 BF_Pass - The token after the URL generated in brewfather- eg:
 
 http://log.brewfather.net/stream?id=<THIS TOKEN HERE>
