@@ -19,7 +19,9 @@ def getToken(username, password):
     response = requests.request("POST", url, headers=headers, data=payload)
     result = json.loads(response.text)
 
-    result['expiry_time'] = result.get('expires_in') + time.time()
+    print(result)
+
+    result['expiry_time'] = result.get('expires_in',0) + time.time()
 
     return(result)
 
