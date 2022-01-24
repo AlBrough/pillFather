@@ -12,7 +12,6 @@ def getToken(username, password):
     url = "https://id.rapt.io/connect/token"
 
     payload = f'client_id=rapt-user&grant_type=password&username={urllib.parse.quote_plus(username)}&password={password}'
-    print(payload)
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded'
     }
@@ -20,7 +19,7 @@ def getToken(username, password):
     response = requests.request("POST", url, headers=headers, data=payload)
     result = json.loads(response.text)
 
-    print(result)
+    #todo account for invalid password
 
     result['expiry_time'] = result.get('expires_in',0) + time.time()
 
