@@ -1,0 +1,12 @@
+{
+  "name": "Python3 webhook",
+  "description": "",
+  "repository": "",
+  "logo": "",
+  "website": "",
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
