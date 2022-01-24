@@ -32,7 +32,7 @@ def getTelemetry(hydrometerId, token):
     startdate = enddate - timedelta(hours=1000)
 
 
-    url = f"https://api.rapt.io/api/Hydrometers/GetTelemetry?hydrometerId={hydrometerId}&startDate={startdate[:-3]}Z&endDate={enddate[:-3]}Z"
+    url = f"https://api.rapt.io/api/Hydrometers/GetTelemetry?hydrometerId={hydrometerId}&startDate={startdate.isoformat()[:-3]}Z&endDate={enddate.isoformat()[:-3]}Z"
 
     payload = {}
     headers = {
@@ -84,7 +84,7 @@ BF_PASS = os.environ.get('BF_PASS')
 token = json.loads(os.environ.get('TOKEN', '{}'))
 
 if __name__ == '__main__':
-    if time.time() < token.get('expiry_time', 0):
+    if time.time() > token.get('expiry_time', 0):
         token = getToken(RAPT_USER, RAPT_PW)
         os.environ["TOKEN"] = json.dumps(token)
 
