@@ -18,7 +18,7 @@ I used the heroku scheduler to run this hourly- added with the following command
 
 git add .
 git commit -m 'deploy'
-git push heroku master
+git push heroku main
 heroku ps:scale web=1
 REM heroku open
 REM heroku addons:create scheduler:standard
