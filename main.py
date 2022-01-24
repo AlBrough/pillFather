@@ -81,7 +81,7 @@ hydroKey = os.environ.get('HYDRO_KEY')
 RAPT_USER = os.environ.get('RAPT_USER')
 RAPT_PW = os.environ.get('RAPT_PW')
 BF_PASS = os.environ.get('BF_PASS')
-token = json.loads(os.environ.get('TOKEN', ''))
+token = json.loads(os.environ.get('TOKEN', '{}'))
 
 if __name__ == '__main__':
     if time.time() < token.get('expiry_time'):
