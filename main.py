@@ -64,7 +64,7 @@ def postBFUpdates(url, hydrodetails, telemetry):
           "name": hydrodetails.get('name', hydrodetails['id']), # Required field, this will be the ID in Brewfather
           "temp": telemetry['temperature'],
           "temp_unit": "C", # C, F, K
-          "gravity": telemetry['gravity'],
+          "gravity": telemetry.get('gravity',0)/1000,
           "gravity_unit": "G", # G, P
           "battery": telemetry['battery']
         }
